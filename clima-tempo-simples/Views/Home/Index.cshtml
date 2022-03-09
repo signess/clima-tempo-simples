@@ -1,0 +1,118 @@
+﻿@using clima_tempo_simples.Models;
+<head>
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <!-- select2-bootstrap4-theme -->
+    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet">
+
+    @{
+        ViewBag.Title = "Clima Tempo";
+
+        IEnumerable<PrevisaoClima> maioresTemperaturas = ViewData["MaioresTemperaturas"] as IEnumerable<PrevisaoClima>;
+        IEnumerable<PrevisaoClima> menoresTemperaturas = ViewData["MenoresTemperaturas"] as IEnumerable<PrevisaoClima>;
+        IEnumerable<Cidade> cidades = ViewData["Cidades"] as IEnumerable<Cidade>;
+    }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#cidadesSelect').select2({
+            });
+        });
+    </script>
+</head>
+
+<div class="jumbotron">
+    <h1>Clima Tempo Simples</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Cidades mais quentes hoje</div>
+
+            @foreach (var item in maioresTemperaturas)
+            {
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <p class="text-left">@Html.DisplayFor(modelItem => item.Cidade.Nome)/@Html.DisplayFor(modelItem => item.Cidade.Estado.UF)</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-right">Min @Html.DisplayFor(modelItem => item.TemperaturaMinima)ºC</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-right">Max @Html.DisplayFor(modelItem => item.TemperaturaMaxima)ºC</p>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Cidades mais frias hoje</div>
+
+            @foreach (var item in menoresTemperaturas)
+            {
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <p class="text-left">@Html.DisplayFor(modelItem => item.Cidade.Nome)/@Html.DisplayFor(modelItem => item.Cidade.Estado.UF)</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-right">Min @Html.DisplayFor(modelItem => item.TemperaturaMinima)º</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-right">Max @Html.DisplayFor(modelItem => item.TemperaturaMaxima)ºC</p>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-4">
+        <label for="txt-nome-cidade">Cidade:</label>
+        <br />
+        <select id="cidadeSelect" style="width:800px">
+            <option selected disabled="disabled">-- Cidade --</option>
+            @foreach (var item in cidades)
+            {
+                <option>@Html.DisplayFor(modelItem => item.Nome)</option>
+
+            }
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h2>
+            Clima para os próximos 7 dias na cidade de São Paulo 
+        </h2>
+    </div>
+</div>
+
+<div class="row center-block">
+    @for (int i = 1; i < 8; i++)
+    {
+        <div class="col-md-1 col-sm-1" style="min-width: 155px; ">
+            <div style="min-width: 150px;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Quarta-Feira</h1>
+                    </div>
+                    <div class="panel-body text-left">
+                        <div><i class="fa fa-2x"></i>Chuvoso</div>
+                        <div>Mínima: 5°C</div>
+                        <div>Máxima: 10°C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+
+

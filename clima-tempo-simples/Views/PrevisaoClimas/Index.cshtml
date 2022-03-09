@@ -1,0 +1,57 @@
+﻿@model IEnumerable<clima_tempo_simples.Models.PrevisaoClima>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DataPrevisao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TemperaturaMinima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TemperaturaMaxima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cidade.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataPrevisao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TemperaturaMinima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TemperaturaMaxima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cidade.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
